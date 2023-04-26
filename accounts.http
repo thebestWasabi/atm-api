@@ -1,0 +1,26 @@
+###
+GET localhost:8080/api/accounts
+
+
+###
+GET localhost:8080/api/accounts/3
+
+
+###
+PATCH localhost:8080/api/accounts/take-money
+Content-Type: application/json
+
+{
+  "accountId": 3,
+  "amount": 1000
+}
+
+
+###
+PATCH localhost:8080/api/accounts/put-money
+Content-Type: application/json
+
+{
+  "accountId": 3,
+  "amount": 300
+}
