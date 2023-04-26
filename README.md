@@ -44,7 +44,7 @@ __GET localhost:8080/api/accounts/1__
 Аккаунт с таким id не найден
 ```
 
-__PUT localhost:8080/api/accounts/take-money__
+__PATCH localhost:8080/api/accounts/take-money__
 Вывести деньги с аккаунта. Пример с запросом в теле (выводим деньги с акка(id=1) на сумму 300):
 ```
 {
@@ -57,7 +57,7 @@ __PUT localhost:8080/api/accounts/take-money__
 На балансе не достаточно средств
 ```
 
-__PUT localhost:8080/api/accounts/put-money__
+__PATCH localhost:8080/api/accounts/put-money__
 Положить деньги на счет. Пример запроса в теле:
 ```
 {
