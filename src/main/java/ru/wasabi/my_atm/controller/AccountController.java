@@ -31,14 +31,14 @@ public class AccountController {
         return transactionService.findById(id);
     }
 
-    @PutMapping("/take-money")
+    @PatchMapping(path = "/take-money", consumes = "application/json", produces = "application/json")
     public void takeMoney(@RequestBody TransactionRequest request) {
         transactionService.takeMoney(
                 request.getAccountId(),
                 request.getAmount());
     }
 
-    @PutMapping("/put-money")
+    @PatchMapping(path = "/put-money", consumes = "application/json", produces = "application/json")
     public void putMoney(@RequestBody TransactionRequest request) {
         transactionService.putMoney(
                 request.getAccountId(),
@@ -47,7 +47,7 @@ public class AccountController {
 
     @ExceptionHandler
     public ResponseEntity<String> accountNotFoundExceptionHandler(AccountNotFoundException e) {
-        return new ResponseEntity<>("Аккаунт не найден", HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Аккаунт с таким id не найден", HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
