@@ -1,25 +1,21 @@
 package ru.wasabi.my_atm.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.wasabi.my_atm.dto.TransactionRequest;
 import ru.wasabi.my_atm.entity.Account;
 import ru.wasabi.my_atm.service.TransactionService;
 import ru.wasabi.my_atm.service.exception.AccountNotFoundException;
-import ru.wasabi.my_atm.service.exception.NotEnoughMoneyInAccount;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/accounts")
+@RequestMapping("/api/v1/accounts")
+@RequiredArgsConstructor
 public class AccountController {
 
     private final TransactionService transactionService;
-
-    public AccountController(TransactionService transactionService) {
-        this.transactionService = transactionService;
-    }
 
     @GetMapping
     public List<Account> getAllAccounts() {
@@ -31,27 +27,8 @@ public class AccountController {
         return transactionService.findById(id);
     }
 
-    @PatchMapping(path = "/take-money", consumes = "application/json", produces = "application/json")
-    public void takeMoney(@RequestBody TransactionRequest request) {
-        transactionService.takeMoney(
-                request.getAccountId(),
-                request.getAmount());
-    }
-
-    @PatchMapping(path = "/put-money", consumes = "application/json", produces = "application/json")
-    public void putMoney(@RequestBody TransactionRequest request) {
-        transactionService.putMoney(
-                request.getAccountId(),
-                request.getAmount());
-    }
-
     @ExceptionHandler
     public ResponseEntity<String> accountNotFoundExceptionHandler(AccountNotFoundException e) {
         return new ResponseEntity<>("Аккаунт с таким id не найден", HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<String> notEnoughMoney(NotEnoughMoneyInAccount e) {
-        return new ResponseEntity<>("На балансе не достаточно средств", HttpStatus.OK);
     }
 }

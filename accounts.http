@@ -1,26 +1,37 @@
-###
-GET localhost:8080/api/accounts
+### Получить список всех аккаунтов
+GET localhost:8080/api/v1/accounts
 
 
-###
-GET localhost:8080/api/accounts/3
+### Получить аккаунт по id
+GET localhost:8080/api/v1/accounts/4
 
 
-###
-PATCH localhost:8080/api/accounts/take-money
+### Снять деньги с аккаунта
+PATCH localhost:8080/api/v1/transactions/take
 Content-Type: application/json
 
 {
-  "accountId": 3,
-  "amount": 1000
+  "accountId": 2,
+  "amount": 200
 }
 
 
-###
-PATCH localhost:8080/api/accounts/put-money
+### Положить деньги на аккаунт
+PATCH localhost:8080/api/v1/transactions/put
 Content-Type: application/json
 
 {
-  "accountId": 3,
-  "amount": 300
+  "accountId": 2,
+  "amount": 50
+}
+
+
+### Перевести деньги с одного аккаунта на другой
+PATCH localhost:8080/api/v1/transactions/transfer
+Content-Type: application/json
+
+{
+  "senderAccountId": 2,
+  "receiverAccountId": 3,
+  "amount": 500
 }

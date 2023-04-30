@@ -1,26 +1,32 @@
 package ru.wasabi.my_atm.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Account {
+@Table(name = "banking_operation")
+public class BankingOperation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private BigDecimal balance;
+
+    @Column(name = "account_id")
+    private Long accountId;
+
+    @Column(name = "amount")
+    private BigDecimal amount;
+
+    @Column(name = "date")
+    private LocalDateTime date;
 }

@@ -12,6 +12,6 @@ import java.math.BigDecimal;
 public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Modifying
-    @Query(value = "update account set amount = :amount where id = :id", nativeQuery = true)
-    void changeBalance(Long id, BigDecimal amount);
+    @Query(value = "update account set balance = :balance where id = :id", nativeQuery = true)
+    void changeBalance(Long id, BigDecimal balance);
 }
