@@ -1,26 +1,59 @@
-###
-GET localhost:8080/api/accounts
+### Получить список всех аккаунтов
+GET localhost:8080/api/v1/accounts
 
 
-###
-GET localhost:8080/api/accounts/3
+### Получить аккаунт по id
+GET localhost:8080/api/v1/accounts/2
 
 
-###
-PATCH localhost:8080/api/accounts/take-money
+### Создать аккаунт
+POST localhost:8080/accounts
 Content-Type: application/json
 
 {
-  "accountId": 3,
-  "amount": 1000
+  "email": "maxim@ya.ru"
 }
 
 
-###
-PATCH localhost:8080/api/accounts/put-money
+### Изменить email
+PUT localhost:8080/api/v1/accounts/2
 Content-Type: application/json
 
 {
-  "accountId": 3,
-  "amount": 300
+  "email": "olyacotletka@icloud.ru"
+}
+
+
+### Удалить аккаунт
+DELETE localhost:8080/api/v1/accounts/5
+
+
+### Снять деньги
+PUT localhost:8080/api/v1/transactions/take
+Content-Type: application/json
+
+{
+  "myAccountId": 1,
+  "amount": 3
+}
+
+
+### Положить деньги
+PUT localhost:8080/api/v1/transactions/put
+Content-Type: application/json
+
+{
+  "myAccountId": 4,
+  "amount": 7
+}
+
+
+### Перевести деньги
+PUT localhost:8080/api/v1/transactions/transfer
+Content-Type: application/json
+
+{
+  "senderAccountId": 3,
+  "receiverAccountId": 2,
+  "amount": 50
 }

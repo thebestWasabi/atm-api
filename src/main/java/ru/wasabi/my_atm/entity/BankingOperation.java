@@ -7,27 +7,26 @@ import lombok.Setter;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Account {
+@Table(name = "banking_operation")
+public class BankingOperation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "account_id")
+    private Long accountId;
 
-    @Column(name = "balance")
-    private BigDecimal balance;
+    @Column(name = "amount")
+    private BigDecimal amount;
 
-    public Account(String email, BigDecimal balance) {
-        this.email = email;
-        this.balance = balance;
-    }
-
+    @Column(name = "date")
+    private LocalDateTime date;
 }
