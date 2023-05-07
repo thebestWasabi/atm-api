@@ -15,4 +15,5 @@ public interface BankingOperationRepository extends JpaRepository<BankingOperati
     @Modifying
     @Query(value = "insert into banking_operation(account_id, amount, date) values (:accountId, :amount, :date)", nativeQuery = true)
     void saveOperation(Long accountId, BigDecimal amount, LocalDateTime date);
+
 }

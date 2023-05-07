@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.11</version>
+		<version>3.0.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -18,6 +18,11 @@
 
 	<properties>
 		<java.version>17</java.version>
+		<lombok.version>1.18.24</lombok.version>
+		<postgresql.version>42.5.1</postgresql.version>
+		<mapstruct.version>1.5.3.Final</mapstruct.version>
+		<hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
+		<jakarta-validation.version>3.0.2</jakarta-validation.version>
 	</properties>
 
 	<dependencies>
@@ -34,6 +39,7 @@
 		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
+			<version>9.5.1</version>
 		</dependency>
 
 		<dependency>
@@ -47,12 +53,38 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+			<version>${postgresql.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+			<version>${jakarta-validation.version}</version>
 		</dependency>
 
 		<dependency>
@@ -76,10 +108,12 @@
 					</excludes>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
 				<configuration>
+					<cleanDisabled>false</cleanDisabled>
 					<url>jdbc:postgresql://localhost:5432/atm_api?currentSchema=boot</url>
 					<user>postgres</user>
 					<password>wasabi</password>
