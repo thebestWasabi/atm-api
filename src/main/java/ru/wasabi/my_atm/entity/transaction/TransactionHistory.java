@@ -29,10 +29,10 @@ public class TransactionHistory {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @ManyToOne
-    @JoinColumn(name = "transaction_type_id")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "transaction_type")
     private TransactionType transactionType;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 }

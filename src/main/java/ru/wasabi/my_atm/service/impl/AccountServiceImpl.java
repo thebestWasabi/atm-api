@@ -66,13 +66,6 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccountById(Long id) {
         Account account = getAccountById(id);
         accountRepository.deleteById(account.getId());
-
-//        Optional<Account> account = accountRepository.findById(id);
-//        if (account.isPresent()) {
-//            accountRepository.deleteById(id);
-//        } else {
-//            throw new ResourceNotFoundException("Аккаунт с таким номером не найден: " + id);
-//        }
     }
 
     @Override
