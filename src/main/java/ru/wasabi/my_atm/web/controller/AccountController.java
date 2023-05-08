@@ -3,7 +3,7 @@ package ru.wasabi.my_atm.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.wasabi.my_atm.entity.Account;
+import ru.wasabi.my_atm.entity.account.Account;
 import ru.wasabi.my_atm.service.AccountService;
 import ru.wasabi.my_atm.web.dto.AccountDto;
 import ru.wasabi.my_atm.web.mapper.AccountMapper;
@@ -56,6 +56,6 @@ public class AccountController {
 
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable Long id) {
-         accountService.deleteAccountById(id);
+        accountService.deleteAccountById(id);
     }
 }

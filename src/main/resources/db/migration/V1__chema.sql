@@ -1,16 +1,17 @@
-drop table if exists account;
-create table account
+DROP TABLE IF EXISTS account;
+CREATE TABLE account
 (
-    id      serial primary key,
-    email   varchar(255) not null unique,
-    balance numeric      not null
+    id      BIGSERIAL PRIMARY KEY,
+    email   VARCHAR(255)   NOT NULL,
+    balance NUMERIC(19, 2) NOT NULL
 );
 
-drop table if exists bankin_operation;
-create table banking_operation
+DROP TABLE IF EXISTS transaction_history;
+CREATE TABLE transaction_history
 (
-    id         serial primary key,
-    account_id int references account,
-    amount     numeric not null,
-    date       timestamp
+    id               BIGSERIAL PRIMARY KEY,
+    account_id       BIGINT         NOT NULL REFERENCES account (id),
+    amount           NUMERIC(19, 2) NOT NULL,
+    transaction_type VARCHAR(255)   NOT NULL,
+    created_at       TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

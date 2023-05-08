@@ -1,4 +1,4 @@
-package ru.wasabi.my_atm.dto;
+package ru.wasabi.my_atm.web.dto;
 
 import lombok.Data;
 

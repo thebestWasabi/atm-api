@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.wasabi.my_atm.dto.TransactionRequest;
+import ru.wasabi.my_atm.web.dto.TransactionRequest;
 import ru.wasabi.my_atm.service.impl.TransactionServiceImpl;
 
 @RestController

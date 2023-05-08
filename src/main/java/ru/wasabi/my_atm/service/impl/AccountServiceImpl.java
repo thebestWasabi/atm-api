@@ -1,19 +1,15 @@
 package ru.wasabi.my_atm.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import ru.wasabi.my_atm.entity.Account;
+import ru.wasabi.my_atm.entity.account.Account;
 import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
 import ru.wasabi.my_atm.repository.AccountRepository;
 import ru.wasabi.my_atm.service.AccountService;
-import ru.wasabi.my_atm.web.dto.AccountDto;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,8 +54,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public Account update(Account account, String email) {
-        Account existingAccount = accountRepository.findById(account.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        Account existingAccount = getAccountById(account.getId());
         existingAccount.setId(account.getId());
         existingAccount.setEmail(account.getEmail());
         existingAccount.setBalance(account.getBalance());
@@ -69,23 +64,21 @@ public class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public void deleteAccountById(Long id) {
-        Optional<Account> account = accountRepository.findById(id);
-        if (account.isPresent()) {
-            accountRepository.deleteById(id);
-        } else {
-            throw new ResourceNotFoundException("Аккаунт с таким номером не найден: " + id);
-        }
+        Account account = getAccountById(id);
+        accountRepository.deleteById(account.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Long getId(Long id) {
-        Account existingAccount = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        Account existingAccount = getAccountById(id);
         return existingAccount.getId();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BigDecimal getBalance(Long id) {
-        Account existingAccount = accountRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+        Account existingAccount = getAccountById(id);
         return existingAccount.getBalance();
     }
 
