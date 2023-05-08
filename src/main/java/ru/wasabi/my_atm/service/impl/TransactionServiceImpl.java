@@ -3,11 +3,12 @@ package ru.wasabi.my_atm.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.wasabi.my_atm.entity.Account;
-import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
-import ru.wasabi.my_atm.repository.AccountRepository;
-import ru.wasabi.my_atm.repository.BankingOperationRepository;
+import ru.wasabi.my_atm.entity.account.Account;
 import ru.wasabi.my_atm.entity.exception.NotEnoughMoneyInAccount;
+import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
+import ru.wasabi.my_atm.entity.transaction.TransactionHistory;
+import ru.wasabi.my_atm.entity.transaction.TransactionType;
+import ru.wasabi.my_atm.repository.AccountRepository;
 import ru.wasabi.my_atm.service.TransactionService;
 
 import java.math.BigDecimal;
@@ -18,7 +19,7 @@ import java.time.LocalDateTime;
 public class TransactionServiceImpl implements TransactionService {
 
     private final AccountRepository accountRepository;
-    private final BankingOperationRepository bankingOperationRepository;
+//    private final BankingOperationRepository bankingOperationRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -30,22 +31,32 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     @Transactional
     public void takeMoney(Long accountId, BigDecimal amount) {
-        Account user = accountRepository.findById(accountId)
-                .orElseThrow(() -> new ResourceNotFoundException("Аккаунт с таким id не найден: " + accountId));
+        Account user = getById(accountId);
 
         if (amount.compareTo(user.getBalance()) <= 0) {
             BigDecimal userNewBalance = user.getBalance().subtract(amount);
             accountRepository.changeBalance(accountId, userNewBalance);
+
+            TransactionHistory history = new TransactionHistory();
+            history.setId(accountId);
+            history.setAmount(amount);
+            history.setTransactionType(TransactionType);
+            history.setCreatedAt(LocalDateTime.now());
+            transactionHistoryRepository.save(history);
+
+            TransactionType transactionType = new TransactionType();
+            transactionType.setName("WITHDRAWAL");
+            transactionTypeRepository.save(transactionType);
         } else {
-            throw new NotEnoughMoneyInAccount("На аккауте не хватает денег");
+            throw new NotEnoughMoneyInAccount("На аккаунте не хватает денег");
         }
     }
 
     @Transactional
-    public void putMoney(Long id, BigDecimal amount) {
-        Account user = getById(id);
+    public void putMoney(Long accountId, BigDecimal amount) {
+        Account user = getById(accountId);
         BigDecimal userNewBalance = user.getBalance().add(amount);
-        accountRepository.changeBalance(id, userNewBalance);
+        accountRepository.changeBalance(accountId, userNewBalance);
     }
 
     @Transactional
@@ -58,8 +69,13 @@ public class TransactionServiceImpl implements TransactionService {
             BigDecimal receiverNewBalance = receiver.getBalance().add(amount);
             accountRepository.changeBalance(senderId, senderNewBalance);
             accountRepository.changeBalance(receiverId, receiverNewBalance);
+
+            TransactionHistory senderHistory = new TransactionHistory();
+            senderHistory.setId(senderId);
+            senderHistory.setAmount(amount.negate());
+            senderHistory.setTransactionType(TransactionType.TRANSFER);
         } else {
-            throw new NotEnoughMoneyInAccount("На аккауте не хватает денег");
+            throw new NotEnoughMoneyInAccount("На аккаунте не хватает денег");
         }
     }
 }

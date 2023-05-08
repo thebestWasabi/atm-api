@@ -7,20 +7,20 @@ GET localhost:8080/api/v1/accounts/2
 
 
 ### Создать аккаунт
-POST localhost:8080/accounts
+POST localhost:8080/api/v1/accounts
 Content-Type: application/json
 
 {
-  "email": "maxim@ya.ru"
+  "email": "maxim23@ya.ru"
 }
 
 
 ### Изменить email
-PUT localhost:8080/api/v1/accounts/2
+PUT localhost:8080/api/v1/accounts/6
 Content-Type: application/json
 
 {
-  "email": "olyacotletka@icloud.ru"
+  "email": "olyacotleta@icloud.ru"
 }
 
 
