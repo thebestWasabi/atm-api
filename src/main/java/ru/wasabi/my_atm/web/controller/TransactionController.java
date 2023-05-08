@@ -5,36 +5,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.wasabi.my_atm.web.dto.TransactionRequest;
-import ru.wasabi.my_atm.service.impl.TransactionServiceImpl;
+import ru.wasabi.my_atm.service.TransactionService;
+import ru.wasabi.my_atm.web.dto.TransactionDto;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/transactions")
 public class TransactionController {
 
-    private final TransactionServiceImpl transactionService;
+    private final TransactionService transactionService;
 
     @PutMapping(path = "/take", consumes = "application/json", produces = "application/json")
-    public void takeMoney(@RequestBody TransactionRequest request) {
+    public void takeMoney(@RequestBody TransactionDto transactionDto) {
         transactionService.takeMoney(
-                request.getMyAccountId(), request.getAmount()
+                transactionDto.getAccountId(),
+                transactionDto.getAmount()
         );
     }
 
     @PutMapping(path = "/put", consumes = "application/json", produces = "application/json")
-    public void putMoney(@RequestBody TransactionRequest request) {
+    public void putMoney(@RequestBody TransactionDto transactionDto) {
         transactionService.putMoney(
-                request.getMyAccountId(), request.getAmount()
+                transactionDto.getAccountId(),
+                transactionDto.getAmount()
         );
     }
 
     @PutMapping(path = "/transfer", consumes = "application/json", produces = "application/json")
-    public void transferMoney(@RequestBody TransactionRequest request) {
+    public void transferMoney(@RequestBody TransactionDto transactionDto) {
         transactionService.transferMoney(
-                request.getSenderAccountId(),
-                request.getReceiverAccountId(),
-                request.getAmount()
+                transactionDto.getSenderAccountId(),
+                transactionDto.getReceiverAccountId(),
+                transactionDto.getAmount()
         );
     }
 

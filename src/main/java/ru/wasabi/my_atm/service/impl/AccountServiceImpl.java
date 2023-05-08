@@ -61,6 +61,11 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.save(existingAccount);
     }
 
+    @Transactional
+    public void changeBalance(Long accountId, BigDecimal balance) {
+        accountRepository.changeBalance(accountId, balance);
+    }
+
     @Override
     @Transactional
     public void deleteAccountById(Long id) {

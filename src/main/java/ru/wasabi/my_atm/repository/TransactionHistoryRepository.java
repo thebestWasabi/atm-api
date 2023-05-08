@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TransactionHistoryRepository extends JpaRepository<TransactionHistory, Long> {
 
-    List<TransactionHistory> findByAccount_Id(Long accountId);
+    List<TransactionHistory> findByAccountIdOrderByCreatedAtDesc(Long accountId);
 }

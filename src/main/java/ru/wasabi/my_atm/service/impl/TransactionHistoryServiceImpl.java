@@ -2,7 +2,6 @@ package ru.wasabi.my_atm.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
 import ru.wasabi.my_atm.entity.transaction.TransactionHistory;
 import ru.wasabi.my_atm.repository.TransactionHistoryRepository;
 import ru.wasabi.my_atm.service.TransactionHistoryService;
@@ -21,7 +20,7 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
     }
 
     @Override
-    public List<TransactionHistory> getByAccountId(Long accountId) {
-        return transactionHistoryRepository.findByAccount_Id(accountId);
+    public List<TransactionHistory> getOperationListByAccountId(Long accountId) {
+        return transactionHistoryRepository.findByAccountIdOrderByCreatedAtDesc(accountId);
     }
 }

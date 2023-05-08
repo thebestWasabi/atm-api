@@ -36,5 +36,4 @@ public class Account {
         this.email = email;
         this.balance = balance;
     }
-
 }

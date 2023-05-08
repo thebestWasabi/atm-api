@@ -10,6 +10,8 @@ import java.util.List;
 public interface AccountMapper {
 
     AccountDto toDto(Account account);
+
     List<AccountDto> toDto(List<Account> accounts);
+
     Account toEntity(AccountDto dto);
 }

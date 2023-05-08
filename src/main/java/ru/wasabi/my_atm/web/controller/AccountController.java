@@ -21,11 +21,13 @@ public class AccountController {
     private final AccountService accountService;
     private final AccountMapper accountMapper;
 
+
     @GetMapping
     public List<AccountDto> getAllAccounts() {
         List<Account> allAccounts = accountService.getAllAccounts();
         return accountMapper.toDto(allAccounts);
     }
+
 
     @GetMapping(path = "/{id}")
     public AccountDto getAccountById(@PathVariable Long id) {
@@ -33,12 +35,14 @@ public class AccountController {
         return accountMapper.toDto(account);
     }
 
+
     @PostMapping
     public AccountDto createAccount(@Validated @RequestBody AccountDto accountDto) {
         Account account = accountMapper.toEntity(accountDto);
         Account createdAccount = accountService.createAccount(account);
         return accountMapper.toDto(createdAccount);
     }
+
 
     @PutMapping("/{accountId}")
     public AccountDto updateAccount(@PathVariable Long accountId, @Validated(OnUpdate.class) @RequestBody AccountDto accountDto) {
@@ -53,6 +57,7 @@ public class AccountController {
         Account updatedAccount = accountService.update(account, accountDto.getEmail());
         return accountMapper.toDto(updatedAccount);
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable Long id) {
