@@ -34,5 +34,5 @@ public class TransactionHistory {
     private TransactionType transactionType;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 }

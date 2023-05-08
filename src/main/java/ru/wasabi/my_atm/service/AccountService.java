@@ -7,20 +7,22 @@ import java.util.List;
 
 public interface AccountService {
 
-    Account createAccount(Account account);
+    List<Account> getAllAccounts();
 
     Account getAccountById(Long id);
 
     Account getAccountByEmail(String email);
 
-    List<Account> getAllAccounts();
+    Account createAccount(Account account);
 
     Account update(Account account, String email);
 
     void deleteAccountById(Long id);
 
-    BigDecimal getBalance(Long id);
+    void changeBalance(Long accountId, BigDecimal balance);
 
     Long getId(Long id);
+
+    BigDecimal getBalance(Long id);
 
 }
