@@ -5,59 +5,47 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.wasabi.my_atm.entity.account.Account;
 import ru.wasabi.my_atm.entity.exception.NotEnoughMoneyInAccount;
-import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
-import ru.wasabi.my_atm.entity.transaction.TransactionHistory;
-import ru.wasabi.my_atm.entity.transaction.TransactionType;
-import ru.wasabi.my_atm.repository.AccountRepository;
+import ru.wasabi.my_atm.entity.transaction.OperationType;
 import ru.wasabi.my_atm.service.AccountService;
-import ru.wasabi.my_atm.service.TransactionHistoryService;
+import ru.wasabi.my_atm.service.OperationListService;
 import ru.wasabi.my_atm.service.TransactionService;
-import ru.wasabi.my_atm.web.dto.TransactionHistoryDto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
 
     private final AccountService accountService;
-    private final TransactionHistoryService transactionHistoryService;
-
-
-    @Override
-    @Transactional(readOnly = true)
-    public Account getById(Long id) {
-        return accountService.getAccountById(id);
-    }
+    private final OperationListService operationListService;
 
 
     @Override
     @Transactional
     public void takeMoney(Long accountId, BigDecimal amount) {
-        Account user = getById(accountId);
+        Account user = accountService.getAccountById(accountId);
         checkIfEnoughMoney(user, amount);
         BigDecimal userNewBalance = user.getBalance().subtract(amount);
         accountService.changeBalance(user.getId(), userNewBalance);
-        createTransactionHistory(user, amount, TransactionType.WITHDRAWAL);
+        operationListService.createTransactionHistory(user, amount.negate(), OperationType.WITHDRAWAL);
     }
 
 
     @Override
     @Transactional
     public void putMoney(Long accountId, BigDecimal amount) {
-        Account user = getById(accountId);
+        Account user = accountService.getAccountById(accountId);
         BigDecimal userNewBalance = user.getBalance().add(amount);
         accountService.changeBalance(accountId, userNewBalance);
-        createTransactionHistory(user, amount, TransactionType.DEPOSIT);
+        operationListService.createTransactionHistory(user, amount, OperationType.DEPOSIT);
     }
 
 
     @Override
     @Transactional
     public void transferMoney(Long senderId, Long receiverId, BigDecimal amount) {
-        Account sender = getById(senderId);
-        Account receiver = getById(receiverId);
+        Account sender = accountService.getAccountById(senderId);
+        Account receiver = accountService.getAccountById(receiverId);
 
         checkIfEnoughMoney(sender, amount);
         BigDecimal senderNewBalance = sender.getBalance().subtract(amount);
@@ -65,18 +53,8 @@ public class TransactionServiceImpl implements TransactionService {
         accountService.changeBalance(sender.getId(), senderNewBalance);
         accountService.changeBalance(receiver.getId(), receiverNewBalance);
 
-        createTransactionHistory(sender, amount.negate(), TransactionType.TRANSFER);
-        createTransactionHistory(receiver, amount, TransactionType.TRANSFER);
-    }
-
-
-    private void createTransactionHistory(Account account, BigDecimal amount, TransactionType transactionType) {
-        TransactionHistory transactionHistory = new TransactionHistory();
-        transactionHistory.setAccount(account);
-        transactionHistory.setAmount(amount);
-        transactionHistory.setTransactionType(transactionType);
-        transactionHistory.setCreatedAt(LocalDateTime.now());
-        transactionHistoryService.save(transactionHistory);
+        operationListService.createTransactionHistory(sender, amount.negate(), OperationType.TRANSFER);
+        operationListService.createTransactionHistory(receiver, amount, OperationType.TRANSFER);
     }
 
 

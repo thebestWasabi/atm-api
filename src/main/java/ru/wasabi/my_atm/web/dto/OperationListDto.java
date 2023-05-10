@@ -5,13 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import ru.wasabi.my_atm.entity.account.Account;
-import ru.wasabi.my_atm.entity.transaction.TransactionType;
+import ru.wasabi.my_atm.entity.transaction.OperationType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class TransactionHistoryDto {
+public class OperationListDto {
 
     @JsonIgnore
     private Long id;
@@ -21,7 +21,7 @@ public class TransactionHistoryDto {
 
     private BigDecimal amount;
 
-    private TransactionType transactionType;
+    private OperationType operationType;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.TIME)
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm")

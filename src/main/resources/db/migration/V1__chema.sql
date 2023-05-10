@@ -6,8 +6,8 @@ CREATE TABLE account
     balance NUMERIC(19, 2) NOT NULL
 );
 
-DROP TABLE IF EXISTS transaction_history;
-CREATE TABLE transaction_history
+DROP TABLE IF EXISTS operation_list;
+CREATE TABLE operation_list
 (
     id               BIGSERIAL PRIMARY KEY,
     account_id       BIGINT         NOT NULL REFERENCES account (id),

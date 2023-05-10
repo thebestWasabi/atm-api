@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import jakarta.persistence.*;
-import ru.wasabi.my_atm.entity.transaction.TransactionHistory;
+import ru.wasabi.my_atm.entity.transaction.OperationList;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Account {
     private BigDecimal balance;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<TransactionHistory> transactionHistoryList;
+    private List<OperationList> operationListList;
 
     public Account(String email, BigDecimal balance) {
         this.email = email;

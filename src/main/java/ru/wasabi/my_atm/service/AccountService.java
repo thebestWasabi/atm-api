@@ -15,14 +15,9 @@ public interface AccountService {
 
     Account createAccount(Account account);
 
-    Account update(Account account, String email);
+    Account updateAccount(Long accountId, Account account);
 
-    void deleteAccountById(Long id);
+    void deleteAccount(Long id);
 
     void changeBalance(Long accountId, BigDecimal balance);
-
-    Long getId(Long id);
-
-    BigDecimal getBalance(Long id);
-
 }

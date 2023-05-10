@@ -45,22 +45,16 @@ public class AccountController {
 
 
     @PutMapping("/{accountId}")
-    public AccountDto updateAccount(@PathVariable Long accountId, @Validated(OnUpdate.class) @RequestBody AccountDto accountDto) {
+    public AccountDto updateAccount(@PathVariable Long accountId,
+                                    @Validated(OnUpdate.class) @RequestBody AccountDto accountDto) {
         Account account = accountMapper.toEntity(accountDto);
-
-        Long id = accountService.getId(accountId);
-        BigDecimal balance = accountService.getBalance(accountId);
-
-        account.setId(id);
-        account.setBalance(balance);
-
-        Account updatedAccount = accountService.update(account, accountDto.getEmail());
+        Account updatedAccount = accountService.updateAccount(accountId, account);
         return accountMapper.toDto(updatedAccount);
     }
 
 
     @DeleteMapping("/{id}")
     public void deleteAccount(@PathVariable Long id) {
-        accountService.deleteAccountById(id);
+        accountService.deleteAccount(id);
     }
 }
