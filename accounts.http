@@ -25,7 +25,7 @@ Content-Type: application/json
 
 
 ### Удалить аккаунт
-DELETE localhost:8080/api/v1/accounts/5
+DELETE localhost:8080/api/v1/accounts/6
 
 
 ### Снять деньги
@@ -33,7 +33,7 @@ PUT localhost:8080/api/v1/transactions/take
 Content-Type: application/json
 
 {
-  "myAccountId": 1,
+  "accountId": 1,
   "amount": 3
 }
 
@@ -43,7 +43,7 @@ PUT localhost:8080/api/v1/transactions/put
 Content-Type: application/json
 
 {
-  "myAccountId": 4,
+  "accountId": 4,
   "amount": 7
 }
 
@@ -53,7 +53,15 @@ PUT localhost:8080/api/v1/transactions/transfer
 Content-Type: application/json
 
 {
-  "senderAccountId": 3,
+  "senderAccountId": 1,
   "receiverAccountId": 2,
   "amount": 50
 }
+
+
+### Получить операции по аккаунту за все время
+GET localhost:8080/api/v1/operations?accountId=6
+
+
+### Получить операции по аккаунту за с сортировкой по дате
+GET localhost:8080/api/v1/operations?accountId=6&startDate=10-05-2023&endDate=10-05-2023
