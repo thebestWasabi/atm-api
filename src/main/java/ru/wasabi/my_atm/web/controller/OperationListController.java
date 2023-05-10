@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/operation-history")
+@RequestMapping("/api/v1/operations")
 @RequiredArgsConstructor
 public class OperationListController {
 

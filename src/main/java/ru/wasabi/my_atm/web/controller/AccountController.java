@@ -9,7 +9,6 @@ import ru.wasabi.my_atm.web.dto.AccountDto;
 import ru.wasabi.my_atm.web.mapper.AccountMapper;
 import ru.wasabi.my_atm.web.validation.OnUpdate;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController

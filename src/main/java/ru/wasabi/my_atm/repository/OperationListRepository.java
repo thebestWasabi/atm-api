@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import ru.wasabi.my_atm.entity.transaction.OperationList;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
