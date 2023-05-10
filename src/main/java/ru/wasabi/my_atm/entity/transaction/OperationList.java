@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "transaction_history")
-public class TransactionHistory {
+@Table(name = "operation_list")
+public class OperationList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +31,7 @@ public class TransactionHistory {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type")
-    private TransactionType transactionType;
+    private OperationType operationType;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

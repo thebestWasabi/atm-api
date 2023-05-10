@@ -1,10 +1,12 @@
 package ru.wasabi.my_atm.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.wasabi.my_atm.entity.account.Account;
 import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
+import ru.wasabi.my_atm.entity.exception.SaveToDataBaseException;
 import ru.wasabi.my_atm.repository.AccountRepository;
 import ru.wasabi.my_atm.service.AccountService;
 
@@ -47,19 +49,22 @@ public class AccountServiceImpl implements AccountService {
             throw new IllegalStateException("Нельзя задать стартовый баланс вручную");
         }
         account.setBalance(BigDecimal.valueOf(0));
-
         return accountRepository.save(account);
     }
 
+
     @Override
     @Transactional
-    public Account update(Account account, String email) {
-        Account existingAccount = getAccountById(account.getId());
-        existingAccount.setId(account.getId());
+    public Account updateAccount(Long accountId, Account account) {
+        Account existingAccount = getAccountById(accountId);
         existingAccount.setEmail(account.getEmail());
-        existingAccount.setBalance(account.getBalance());
-        return accountRepository.save(existingAccount);
+        try {
+            return accountRepository.save(existingAccount);
+        } catch (DataIntegrityViolationException e) {
+            throw new SaveToDataBaseException("Не удалось сохранить объект в базу данных с id:" + accountId);
+        }
     }
+
 
     @Transactional
     public void changeBalance(Long accountId, BigDecimal balance) {
@@ -68,23 +73,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     @Transactional
-    public void deleteAccountById(Long id) {
+    public void deleteAccount(Long id) {
         Account account = getAccountById(id);
         accountRepository.deleteById(account.getId());
     }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Long getId(Long id) {
-        Account existingAccount = getAccountById(id);
-        return existingAccount.getId();
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public BigDecimal getBalance(Long id) {
-        Account existingAccount = getAccountById(id);
-        return existingAccount.getBalance();
-    }
-
 }

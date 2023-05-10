@@ -6,8 +6,6 @@ import java.math.BigDecimal;
 
 public interface TransactionService {
 
-    Account getById(Long id);
-
     void takeMoney(Long id, BigDecimal amount);
 
     void putMoney(Long id, BigDecimal amount);
