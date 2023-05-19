@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
 import ru.wasabi.my_atm.entity.transaction.OperationList;
+import ru.wasabi.my_atm.service.AccountService;
 import ru.wasabi.my_atm.service.OperationListService;
 import ru.wasabi.my_atm.web.dto.OperationListDto;
 import ru.wasabi.my_atm.web.mapper.OperationListMapper;
@@ -22,6 +23,7 @@ public class OperationListController {
 
     private final OperationListService operationListService;
     private final OperationListMapper operationListMapper;
+    private final AccountService accountService;
 
 
     @GetMapping
@@ -29,7 +31,9 @@ public class OperationListController {
             @RequestParam Long accountId,
             @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
             @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate) {
+
         List<OperationList> operationList;
+        accountService.getAccountById(accountId);
 
         if (startDate != null && endDate != null) {
             operationList = operationListService.getOperationListSort(accountId, startDate, endDate);
