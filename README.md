@@ -54,6 +54,25 @@ __GET localhost:8080/api/v1/accounts/2__
 Аккаунт с таким id не найден
 ```
 
+### Создать аккаунт
+__POST localhost:8080/api/v1/accounts__
+```
+{
+  "email": "maxim23@ya.ru"
+}
+```
+
+### Изменить email
+__PUT localhost:8080/api/v1/accounts/3__
+```
+{
+  "email": "olyacotleta@icloud.ru"
+}
+```
+
+### Удалить аккаунт по id
+__DELETE localhost:8080/api/v1/accounts/6__
+
 __PUT localhost:8080/api/v1/transactions/take__
 Вывести деньги с аккаунта. Пример с запросом в теле (выводим деньги с акка(id=1) на сумму 300):
 ```
@@ -90,4 +109,4 @@ __GET localhost:8080/api/v1/operations?accountId=5__
 Получить операции по аккаунту за все время
 
 __GET localhost:8080/api/v1/operations?accountId=6&startDate=10-05-2023&endDate=10-05-2023__
-Получить операции по аккаунту за с сортировкой по дате
+Получить операции по аккаунту с сортировкой по дате
