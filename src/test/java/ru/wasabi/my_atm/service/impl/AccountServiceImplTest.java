@@ -15,6 +15,7 @@ import ru.wasabi.my_atm.repository.AccountRepository;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -29,7 +30,7 @@ class AccountServiceImplTest {
     AccountServiceImpl accountService;
 
     @Test
-    @DisplayName("GET api/v1/accounts")
+    @DisplayName("GET api/v1/accounts (service)")
     void getAllAccounts_ReturnValidResponseEntity() {
         // given
         List<Account> accounts = new ArrayList<>();
@@ -48,5 +49,39 @@ class AccountServiceImplTest {
         assertEquals(BigDecimal.valueOf(1100), result.get(1).getBalance());
 
         verify(accountRepository, times(1)).findAll();
+    }
+
+    @Test
+    @DisplayName("/GET api/v1/accounts/{id} (service)")
+    void getAccountByIdTest() {
+        // given
+        Account account = new Account("wasabi@yandex.ru");
+        when(accountRepository.findById(account.getId())).thenReturn(Optional.of(account));
+
+        // when
+        Account result = accountService.getAccountById(account.getId());
+
+        // then
+        assertNotNull(result);
+        assertEquals("wasabi@yandex.ru", result.getEmail());
+        assertEquals(result, account);
+
+    }
+
+    @Test
+    @DisplayName("POST api/v1/accounts (service)")
+    void createAccountWithEmailTest() {
+        // given
+        Account account = new Account("openpw@ya.ru");
+        when(accountRepository.save(account)).thenReturn(account);
+
+        // when
+        Account result = accountService.createAccount(account);
+
+        //then
+        assertNotNull(result);
+        assertEquals("openpw@ya.ru", result.getEmail());
+        assertEquals(BigDecimal.valueOf(0), result.getBalance());
+        assertEquals(result, account);
     }
 }
