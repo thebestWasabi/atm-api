@@ -54,24 +54,26 @@ __GET localhost:8080/api/v1/accounts/2__
 Аккаунт с таким id не найден
 ```
 
-### Создать аккаунт
 __POST localhost:8080/api/v1/accounts__
+Создать аккаунт
 ```
 {
   "email": "maxim23@ya.ru"
 }
 ```
 
-### Изменить email
 __PUT localhost:8080/api/v1/accounts/3__
+Изменить email
 ```
 {
   "email": "olyacotleta@icloud.ru"
 }
 ```
 
-### Удалить аккаунт по id
 __DELETE localhost:8080/api/v1/accounts/6__
+Удалить аккаунт по id
+
+
 
 __PUT localhost:8080/api/v1/transactions/take__
 Вывести деньги с аккаунта. Пример с запросом в теле (выводим деньги с акка(id=1) на сумму 300):
