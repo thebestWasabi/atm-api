@@ -1,5 +1,7 @@
 ## Проект "ATM-Api"
-Веб-интерфейс для проекта не подразумевается. Так же подключил Flyway для миграции (V1__chema.sql и V2__demo_data.sql лежат в resources.db.migration). В корге проекта лежит файл accounts.http, в нем прописаны нужные запросы.
+Веб-интерфейс для проекта не подразумевается. 
+
+Так же подключил Flyway для миграции (V1__chema.sql и V2__demo_data.sql лежат в resources.db.migration). В корге проекта лежит файл accounts.http, в нем прописаны нужные запросы.
 
 В приложении можно положить деньги на аккаунт, снять деньги с аккаунта, перевести деньги с одного аккаунта на другой. Так же все операции/транзакции записываются в таблицу operation_list. У аккаунта по id можно вызвать историю транзакций с фильтрацией по датам (max :: min) или без фильтрации по датам. Обработка ошибок присутствует(все выводиться в ответах в json-формате).
 
@@ -20,7 +22,7 @@ id | account_id | amount | transaction_type | created_at
 
 ---
 
-__GET localhost:8080/api/accounts__
+__GET localhost:8080/api/v1/accounts__
 Получение списка всех аккаунтов. Пример ответа:
 ```
 [
@@ -38,7 +40,7 @@ __GET localhost:8080/api/accounts__
 
 ```
 
-__GET localhost:8080/api/accounts/1__
+__GET localhost:8080/api/v1/accounts/2__
 Получить аккаунт по ID. Пример ответа:
 ```
 {
@@ -52,7 +54,7 @@ __GET localhost:8080/api/accounts/1__
 Аккаунт с таким id не найден
 ```
 
-__PATCH localhost:8080/api/accounts/take-money__
+__PUT localhost:8080/api/v1/transactions/take__
 Вывести деньги с аккаунта. Пример с запросом в теле (выводим деньги с акка(id=1) на сумму 300):
 ```
 {
@@ -65,7 +67,7 @@ __PATCH localhost:8080/api/accounts/take-money__
 На балансе не достаточно средств
 ```
 
-__PATCH localhost:8080/api/accounts/put-money__
+__PUT localhost:8080/api/v1/transactions/put__
 Положить деньги на счет. Пример запроса в теле:
 ```
 {
@@ -73,3 +75,19 @@ __PATCH localhost:8080/api/accounts/put-money__
     "amount": 20000
 }
 ```
+
+__PUT localhost:8080/api/v1/transactions/transfer__
+Перевести деньги с одного счета на другой. Пример запроса в теле:
+```
+{
+  "senderAccountId": 1,
+  "receiverAccountId": 2,
+  "amount": 50
+}
+```
+
+__GET localhost:8080/api/v1/operations?accountId=5__
+Получить операции по аккаунту за все время
+
+__GET localhost:8080/api/v1/operations?accountId=6&startDate=10-05-2023&endDate=10-05-2023__
+Получить операции по аккаунту за с сортировкой по дате
