@@ -32,6 +32,10 @@ public class Account {
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private List<OperationList> operationListList;
 
+    public Account(String email) {
+        this.email = email;
+    }
+
     public Account(String email, BigDecimal balance) {
         this.email = email;
         this.balance = balance;
