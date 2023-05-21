@@ -28,10 +28,10 @@ class AccountControllerTest {
     @InjectMocks
     private AccountController accountController;
 
-    @Test
-    void getAllAccounts() {
-
-    }
+//    @Test
+//    void getAllAccounts() {
+//
+//    }
 
     @Test
     void getAccountById() {
@@ -63,11 +63,11 @@ class AccountControllerTest {
         verify(accountService).createAccount(account);
     }
 
-    @Test
-    void updateAccount() {
-    }
-
-    @Test
-    void deleteAccount() {
-    }
+//    @Test
+//    void updateAccount() {
+//    }
+//
+//    @Test
+//    void deleteAccount() {
+//    }
 }
