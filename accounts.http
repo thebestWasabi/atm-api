@@ -1,22 +1,22 @@
 ### Получить список всех аккаунтов
-GET localhost:8080/api/v1/accounts
+GET localhost:8087/api/v1/accounts
 
 
 ### Получить аккаунт по id
-GET localhost:8080/api/v1/accounts/2
+GET localhost:8087/api/v1/accounts/2
 
 
 ### Создать аккаунт
-POST localhost:8080/api/v1/accounts
+POST localhost:8087/api/v1/accounts
 Content-Type: application/json
 
 {
-  "email": "maxim23@ya.ru"
+  "email": "maxdadude23@ya.ru"
 }
 
 
 ### Изменить email
-PUT localhost:8080/api/v1/accounts/3
+PUT localhost:8087/api/v1/accounts/3
 Content-Type: application/json
 
 {
@@ -25,11 +25,11 @@ Content-Type: application/json
 
 
 ### Удалить аккаунт
-DELETE localhost:8080/api/v1/accounts/6
+DELETE localhost:8087/api/v1/accounts/6
 
 
 ### Снять деньги
-PUT localhost:8080/api/v1/transactions/take
+PUT localhost:8087/api/v1/transactions/take
 Content-Type: application/json
 
 {
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 
 ### Положить деньги
-PUT localhost:8080/api/v1/transactions/put
+PUT localhost:8087/api/v1/transactions/put
 Content-Type: application/json
 
 {
@@ -49,7 +49,7 @@ Content-Type: application/json
 
 
 ### Перевести деньги
-PUT localhost:8080/api/v1/transactions/transfer
+PUT localhost:8087/api/v1/transactions/transfer
 Content-Type: application/json
 
 {
@@ -60,8 +60,8 @@ Content-Type: application/json
 
 
 ### Получить операции по аккаунту за все время
-GET localhost:8080/api/v1/operations?accountId=5
+GET localhost:8087/api/v1/operations?accountId=5
 
 
 ### Получить операции по аккаунту с сортировкой по дате
-GET localhost:8080/api/v1/operations?accountId=6&startDate=10-05-2023&endDate=10-05-2023
+GET localhost:8087/api/v1/operations?accountId=6&startDate=10-05-2023&endDate=10-05-2023
