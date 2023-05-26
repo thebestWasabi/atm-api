@@ -6,9 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.wasabi.my_atm.entity.account.Account;
+import ru.wasabi.my_atm.entity.Account;
 import ru.wasabi.my_atm.repository.AccountRepository;
-import ru.wasabi.my_atm.service.AccountService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

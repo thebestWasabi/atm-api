@@ -1,4 +1,4 @@
-package ru.wasabi.my_atm.entity.transaction;
+package ru.wasabi.my_atm.entity;
 
 public enum OperationType {
     DEPOSIT,

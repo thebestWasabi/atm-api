@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.wasabi.my_atm.entity.account.Account;
+import ru.wasabi.my_atm.entity.Account;
 
 import java.math.BigDecimal;
 import java.util.Optional;

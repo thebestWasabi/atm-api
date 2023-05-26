@@ -2,9 +2,9 @@ package ru.wasabi.my_atm.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.wasabi.my_atm.entity.account.Account;
-import ru.wasabi.my_atm.entity.transaction.OperationList;
-import ru.wasabi.my_atm.entity.transaction.OperationType;
+import ru.wasabi.my_atm.entity.Account;
+import ru.wasabi.my_atm.entity.OperationList;
+import ru.wasabi.my_atm.entity.OperationType;
 import ru.wasabi.my_atm.repository.OperationListRepository;
 import ru.wasabi.my_atm.service.OperationListService;
 

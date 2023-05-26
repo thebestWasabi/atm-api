@@ -3,7 +3,7 @@ package ru.wasabi.my_atm.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import ru.wasabi.my_atm.entity.transaction.OperationList;
+import ru.wasabi.my_atm.entity.OperationList;
 
 import java.time.LocalDate;
 import java.util.List;

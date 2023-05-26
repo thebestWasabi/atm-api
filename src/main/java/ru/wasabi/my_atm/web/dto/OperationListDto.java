@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
-import ru.wasabi.my_atm.entity.account.Account;
-import ru.wasabi.my_atm.entity.transaction.OperationType;
+import ru.wasabi.my_atm.entity.Account;
+import ru.wasabi.my_atm.entity.OperationType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

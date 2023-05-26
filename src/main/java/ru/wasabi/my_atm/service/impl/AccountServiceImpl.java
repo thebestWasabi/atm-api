@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.wasabi.my_atm.entity.account.Account;
+import ru.wasabi.my_atm.entity.Account;
 import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
 import ru.wasabi.my_atm.entity.exception.SaveToDataBaseException;
 import ru.wasabi.my_atm.repository.AccountRepository;
