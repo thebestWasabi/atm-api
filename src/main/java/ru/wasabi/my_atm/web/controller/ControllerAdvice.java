@@ -23,17 +23,20 @@ public class ControllerAdvice {
         return new ExceptionBody(e.getMessage());
     }
 
+
     @ExceptionHandler(NotEnoughMoneyInAccount.class)
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionBody handleNotEnoughMoneyInAccountException(NotEnoughMoneyInAccount e) {
         return new ExceptionBody(e.getMessage());
     }
+
 
     @ExceptionHandler(IllegalStateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionBody handleIllegalStateException(IllegalStateException e) {
         return new ExceptionBody(e.getMessage());
     }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -44,6 +47,7 @@ public class ControllerAdvice {
                 .collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage)));
         return exceptionBody;
     }
+
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -57,6 +61,7 @@ public class ControllerAdvice {
                 )));
         return exceptionBody;
     }
+
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

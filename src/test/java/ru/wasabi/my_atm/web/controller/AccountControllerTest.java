@@ -5,9 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import ru.wasabi.my_atm.entity.account.Account;
+import ru.wasabi.my_atm.entity.Account;
 import ru.wasabi.my_atm.service.AccountService;
-import ru.wasabi.my_atm.service.impl.AccountServiceImpl;
 import ru.wasabi.my_atm.web.dto.AccountDto;
 import ru.wasabi.my_atm.web.mapper.AccountMapper;
 

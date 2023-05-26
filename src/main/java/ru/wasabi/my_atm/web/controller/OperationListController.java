@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.wasabi.my_atm.entity.exception.ResourceNotFoundException;
-import ru.wasabi.my_atm.entity.transaction.OperationList;
+import ru.wasabi.my_atm.entity.OperationList;
 import ru.wasabi.my_atm.service.AccountService;
 import ru.wasabi.my_atm.service.OperationListService;
 import ru.wasabi.my_atm.web.dto.OperationListDto;

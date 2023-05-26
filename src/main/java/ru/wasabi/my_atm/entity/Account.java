@@ -1,9 +1,8 @@
-package ru.wasabi.my_atm.entity.account;
+package ru.wasabi.my_atm.entity;
 
 import lombok.*;
 
 import jakarta.persistence.*;
-import ru.wasabi.my_atm.entity.transaction.OperationList;
 
 import java.math.BigDecimal;
 import java.util.List;

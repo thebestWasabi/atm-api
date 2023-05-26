@@ -1,11 +1,10 @@
-package ru.wasabi.my_atm.entity.transaction;
+package ru.wasabi.my_atm.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.wasabi.my_atm.entity.account.Account;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

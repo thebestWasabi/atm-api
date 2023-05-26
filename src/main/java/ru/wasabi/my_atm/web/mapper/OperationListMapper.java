@@ -1,7 +1,7 @@
 package ru.wasabi.my_atm.web.mapper;
 
 import org.mapstruct.Mapper;
-import ru.wasabi.my_atm.entity.transaction.OperationList;
+import ru.wasabi.my_atm.entity.OperationList;
 import ru.wasabi.my_atm.web.dto.OperationListDto;
 
 import java.util.List;

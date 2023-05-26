@@ -1,7 +1,5 @@
 package ru.wasabi.my_atm.service;
 
-import ru.wasabi.my_atm.entity.account.Account;
-
 import java.math.BigDecimal;
 
 public interface TransactionService {
